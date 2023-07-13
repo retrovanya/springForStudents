@@ -24,4 +24,47 @@ public class FirstController {
     public String goodByePage(){
         return "first/goodbye";
     }
+
+    @GetMapping("/calculator")
+    public String calculatorPage(@RequestParam(value = "a", required = false) int a,
+                                 @RequestParam(value = "b", required = false) int b,
+                                 @RequestParam(value = "action", required = false) String action,
+                                 Model model) {
+        if (actionComparing(action)==1) model.addAttribute("resultMessage",
+                "result of multiplication : " + multiplication(a,b));
+        if (actionComparing(action)==2) model.addAttribute("resultMessage",
+                "result of addition : " + addition(a,b));
+        if (actionComparing(action)==3) model.addAttribute("resultMessage",
+                "result of subtraction : " + subtraction(a,b));
+        if (actionComparing(action)==4) model.addAttribute("resultMessage",
+                "result of division : " + division(a,b));
+        return "first/calculator";
+    }
+
+    public int addition(int a, int b) {
+        return a+b;
+    }
+
+    public int multiplication(int a, int b) {
+        return a*b;
+    }
+
+    public int subtraction(int a, int b) {
+        return a-b;
+    }
+
+    public double division(int a, int b) {
+        if (b==0) throw new ArithmeticException("you can't divide by zero");
+        return (double) a/b;
+    }
+
+    public int actionComparing(String action) {
+        if (action.equals("multiplication")) return 1;
+        if (action.equals("addition")) return 2;
+        if (action.equals("subtraction")) return 3;
+        if (action.equals("division")) return 4;
+        return 0;
+    }
+
+
 }
