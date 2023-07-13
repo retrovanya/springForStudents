@@ -26,9 +26,9 @@ public class FirstController {
     }
 
     @GetMapping("/calculator")
-    public String calculatorPage(@RequestParam(value = "a", required = false) int a,
-                                 @RequestParam(value = "b", required = false) int b,
-                                 @RequestParam(value = "action", required = false) String action,
+    public String calculatorPage(@RequestParam(value = "a") int a,
+                                 @RequestParam(value = "b") int b,
+                                 @RequestParam(value = "action") String action,
                                  Model model) {
         if (actionComparing(action)==1) model.addAttribute("resultMessage",
                 "result of multiplication : " + multiplication(a,b));
