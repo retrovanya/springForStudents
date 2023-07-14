@@ -1,10 +1,12 @@
 package springmvc.dao;
 
+import org.springframework.stereotype.Component;
 import springmvc.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PersonDAO {
     private static int PEOPLE_COUNT; //id
     private List<Person> people;
@@ -22,7 +24,7 @@ public class PersonDAO {
         return people;
     }
 
-    public Person show(int id){
-        return people.stream().filter(person -> person.getId()==id).findAny().orElse(null); //ищем по id
+    public Person show(int id) {
+        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null); //ищем по id
     }
 }
