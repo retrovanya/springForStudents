@@ -1,10 +1,23 @@
 package springmvc.models;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class Person {
 
     private int id;
+
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 1, max = 20, message = "name length should be from 1 to 20")
     private String name;
+
+    @Min(value = 0, message = "age should be greater than 0")
     private int age;
+
+    @NotEmpty(message = "email should not be empty")
+    @Email(message = "email should be valid")
     private String email;
 
     public Person(int id, String name, int age, String email) {
