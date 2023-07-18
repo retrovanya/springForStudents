@@ -1,6 +1,7 @@
 package springmvc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +25,12 @@ import javax.sql.DataSource;
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+    @Value("${spring.datasource.username}")
+    private String dbUsername;
+    @Value("${spring.datasource.password}")
+    private String dbPassword;
 
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
@@ -58,9 +65,9 @@ public class SpringConfig implements WebMvcConfigurer {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5433/first_db");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres70");
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
 
         return dataSource;
     }
